@@ -19,7 +19,7 @@
     <input type="text" id="station" name="station" required>
 
     <label for="date">Date (YYYY-MM-DD):</label>
-    <input type="text" id="date" name="date" required>
+    <input type="text" id="date" name="date">
 
     <button type="submit">Get Temperature</button>
   </form>
@@ -38,6 +38,12 @@
     </div>
   {% endif %}
 
-  {{data|safe}}
+  {% if table_data %}
+    <h2>All temperatures for station {{ selected_station }}</h2>
+    {{ table_data|safe }}
+  {% endif %}
+
+  <h2>Available stations</h2>
+  {{ data|safe }}
 </body>
 </html>
