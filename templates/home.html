@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Weather API</title>
+  <meta charset="UTF-8">
+  <title>Weather API - Form Version</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; }
+    label, input { display: block; margin: 0.5rem 0; }
+    .result, .error { margin-top: 1rem; padding: 1rem; border: 1px solid #ccc; }
+    .result { background-color: #e0ffe0; }
+    .error { background-color: #ffe0e0; }
+  </style>
 </head>
 <body>
-   <h1>Weather data API</h1>
-   <p>URL fromat: http://127.0.0.1:5000/api/v1/station/date</p>
-   <p>URL fromat: http://127.0.0.1:5000/api/v1/10/19881025</p>
+  <h1>Weather Data Lookup</h1>
+
+  <form method="POST">
+    <label for="station">Station Number:</label>
+    <input type="text" id="station" name="station" required>
+
+    <label for="date">Date (YYYY-MM-DD):</label>
+    <input type="text" id="date" name="date" required>
+
+    <button type="submit">Get Temperature</button>
+  </form>
+
+  {% if result %}
+    <div class="result">
+      <strong>Station:</strong> {{ result.station }}<br>
+      <strong>Date:</strong> {{ result.date }}<br>
+      <strong>Temperature:</strong> {{ result.temperature }} °C
+    </div>
+  {% endif %}
+
+  {% if error %}
+    <div class="error">
+      <strong>Error:</strong> {{ error }}
+    </div>
+  {% endif %}
 </body>
 </html>
