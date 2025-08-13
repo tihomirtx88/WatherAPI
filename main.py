@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request
 import pandas as pd
 
-app = Flask(__name__)
+app = Flask(__name__);
+
+stations = pd.read_csv("data/stations.txt", skiprows=17);
+stations = stations[["STAID", "STANAME                                 "]];
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -37,7 +40,7 @@ def home():
             except Exception as e:
                 error = f"An error occurred: {str(e)}"
 
-    return render_template("home.html", result=result, error=error)
+    return render_template("home.html", result=result, error=error, data=stations.to_html())
 
 if __name__ == "__main__":
     app.run(debug=True)
